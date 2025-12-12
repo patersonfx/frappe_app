@@ -210,6 +210,16 @@ bench --site [site-name] install-app hrms
 
 ### 11. Start Development Server
 
+#### Enable Developer Mode (Optional)
+
+For development purposes, enable developer mode:
+
+```bash
+bench set-config -g developer_mode 1
+```
+
+#### Start the Server
+
 ```bash
 bench start
 ```
