@@ -350,6 +350,12 @@ mkdir -p /home/frappe/backups
 # Activate virtual environment
 source env/bin/activate
 
+# Setup requirements for all apps
+bench setup requirements
+
+# Install requirements for specific app (manual method)
+pip install -r apps/[app-name]/requirements.txt
+
 # Upgrade pip
 bench pip install --upgrade pip
 
