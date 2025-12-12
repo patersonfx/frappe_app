@@ -224,6 +224,20 @@ bench set-config -g developer_mode 1
 bench start
 ```
 
+#### Configure Git
+```bash
+# Set your Git username globally
+git config --global user.name "[Your Name]"
+
+# Set your Git email globally
+git config --global user.email "[your.email@example.com]"
+
+# Verify Git configuration
+git config --list
+```
+
+**Note**: Replace `[Your Name]` and `[your.email@example.com]` with your actual name and email address.
+
 Access ERPNext at: `http://your-server-ip:8000`
 
 **Login Credentials:**
