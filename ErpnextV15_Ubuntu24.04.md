@@ -350,6 +350,9 @@ mkdir -p /home/frappe/backups
 # Activate virtual environment
 source env/bin/activate
 
+# De-activate virtual environment
+deactivate
+
 # Setup requirements for all apps
 bench setup requirements
 
