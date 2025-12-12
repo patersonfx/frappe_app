@@ -353,6 +353,12 @@ source env/bin/activate
 # De-activate virtual environment
 deactivate
 
+# Create a new virtual environment manually (outside bench)
+# python3: invokes Python 3 interpreter
+# -m venv: runs the venv module to create a virtual environment
+# myenv: directory name where the virtual environment will be created
+python3 -m venv myenv
+
 # Setup requirements for all apps
 bench setup requirements
 
