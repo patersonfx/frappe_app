@@ -496,6 +496,9 @@ If you encounter Git repository corruption or need to reset a custom app:
 # Go to apps directory
 cd ~/frappe-bench/apps
 
+# Verify remote repository URLs (shows fetch and push URLs for all configured remotes)
+git remote -v
+
 # Backup current folder
 mv [app-name] [app-name]_backup
 
