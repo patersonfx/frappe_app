@@ -10,9 +10,9 @@ This document outlines the complete deployment process for the **Frappe Bench & 
 ### Infrastructure Requirements
 - **Server**: Ubuntu 24.04.x LTS VM
 - **Hardware Specs**:
-  - 16 GB RAM
-  - 100 GB HDD
-  - Intel(R) Xeon(R) Gold 6342 CPU @ 2.80GHz (2 Cores)
+  - **CPU**: 4+ cores (2.5 GHz or higher recommended)
+  - **RAM**: 16 GB (minimum 8 GB)
+  - **Storage**: 100 GB SSD (HDD acceptable, SSD recommended for better performance)
 - **Network**: {COMPANY_NAME} network access
 - **Database**: MariaDB (installed with Frappe)
 - **Cache**: Redis (installed with Frappe)
@@ -34,10 +34,10 @@ This document outlines the complete deployment process for the **Frappe Bench & 
 **Responsibility**: {COMPANY_NAME} IT
 
 **Specifications**:
-- OS: Ubuntu 22.04.5 LTS
-- RAM: 16 GB
-- Storage: 100 GB HDD
-- CPU: Intel(R) Xeon(R) Gold 6342 @ 2.80GHz (2 Cores)
+- **OS**: Ubuntu 24.04.x LTS
+- **CPU**: 4+ cores (2.5 GHz or higher)
+- **RAM**: 16 GB (minimum 8 GB)
+- **Storage**: 100 GB (SSD recommended)
 
 **Verification**:
 ```bash
