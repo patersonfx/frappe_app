@@ -10,7 +10,7 @@ This document outlines the complete deployment process for the **Frappe Bench & 
 ### Infrastructure Requirements
 - **Server**: Ubuntu 24.04.x LTS VM
 - **Hardware Specs**:
-  - **CPU**: 4+ cores (2.5 GHz or higher recommended)
+  - **CPU**: 4+ cores (minimum 2 cores, 2.5 GHz or higher recommended)
   - **RAM**: 16 GB (minimum 8 GB)
   - **Storage**: 100 GB SSD (HDD acceptable, SSD recommended for better performance)
 - **Network**: {COMPANY_NAME} network access
@@ -35,7 +35,7 @@ This document outlines the complete deployment process for the **Frappe Bench & 
 
 **Specifications**:
 - **OS**: Ubuntu 24.04.x LTS
-- **CPU**: 4+ cores (2.5 GHz or higher)
+- **CPU**: 4+ cores (minimum 2 cores, 2.5 GHz or higher)
 - **RAM**: 16 GB (minimum 8 GB)
 - **Storage**: 100 GB (SSD recommended)
 
