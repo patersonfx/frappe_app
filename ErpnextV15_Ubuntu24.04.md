@@ -460,6 +460,24 @@ sudo tail -f /var/log/supervisor/supervisord.log
 sudo tail -f /var/log/nginx/error.log
 ```
 
+### Cache Management
+```bash
+# Clean all __pycache__ directories in the entire bench
+find /home/frappe/frappe-bench -type d -name "__pycache__" -exec rm -rf {} +
+
+# Or clean __pycache__ for a specific app only
+find /home/frappe/frappe-bench/apps/forex -type d -name "__pycache__" -exec rm -rf {} +
+
+# Clear site cache after cleaning __pycache__
+bench --site [site-name] clear-cache
+```
+
+**Note**: Cleaning `__pycache__` directories is useful when:
+- Python code changes are not being reflected
+- Debugging import or module loading issues
+- After updating or modifying Python files
+- Ensuring fresh Python bytecode compilation
+
 ---
 
 ## Troubleshooting
