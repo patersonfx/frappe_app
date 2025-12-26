@@ -238,6 +238,103 @@ git config --list
 
 **Note**: Replace `[Your Name]` and `[your.email@example.com]` with your actual name and email address.
 
+### Git Workflow for Multi-App Development
+
+When working with Frappe Bench's multiple applications, you'll frequently encounter Git workflow scenarios. This section provides a quick reference for common situations.
+
+#### Handling Diverged Branches (Commit Before Pull)
+
+When your local branch has diverged from the upstream branch (you have commits locally AND the remote has new commits), use the following workflow:
+
+**Check Status and Rebase (works with any branch):**
+```bash
+# Check current status
+git status
+
+# View all branches including remote
+git branch -a
+
+# Fetch latest changes from upstream
+git fetch upstream
+
+# Option 1: Rebase using upstream tracking (automatic - recommended)
+git rebase @{u}
+
+# Option 2: Rebase using dynamic branch detection
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+REMOTE=$(git config branch.$BRANCH.remote || echo "upstream")
+git rebase $REMOTE/$BRANCH
+```
+
+**Example: Rebase on 360-one branch**
+```bash
+# If you're on 360-one branch, this automatically rebases onto upstream/360-one
+git status
+git fetch upstream
+git rebase @{u}
+```
+
+**When to use this workflow:**
+- Your branch shows "X ahead, Y behind" in git status
+- You have local commits that need to stay on top of remote changes
+- You want a clean, linear commit history
+
+**Important Notes:**
+- Ensure your working tree is clean before rebasing (`git status` should show no uncommitted changes)
+- If you have uncommitted changes, commit them first or use `git stash`
+- After rebase, you may need to force push: `git push --force-with-lease`
+- Create a backup branch before rebasing: `git branch backup-$(git rev-parse --abbrev-ref HEAD)-$(date +%Y%m%d)`
+
+#### Alternative: Merge Instead of Rebase
+
+If you prefer to preserve the complete history with a merge commit:
+
+```bash
+# Dynamic merge (works with any branch)
+git fetch upstream
+git merge @{u}
+
+# Or manually specify:
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+REMOTE=$(git config branch.$BRANCH.remote || echo "upstream")
+git merge $REMOTE/$BRANCH
+git push $REMOTE $BRANCH
+```
+
+#### Quick Workflow Reference
+
+**Scenario 1: Clean working tree, branch diverged (dynamic)**
+```bash
+# Works with any branch - detects current branch automatically
+git status && git fetch upstream && git rebase @{u}
+```
+
+**Scenario 2: Have uncommitted changes**
+```bash
+# Option A: Commit first
+git add .
+git commit -m "WIP: description"
+git fetch upstream && git rebase @{u}
+
+# Option B: Stash
+git stash save "Work in progress"
+git fetch upstream && git rebase @{u}
+git stash pop
+```
+
+**For comprehensive workflow guidance, see:** [git-workflow-frappe-bench.md](git-workflow-frappe-bench.md)
+
+#### Helper Scripts
+
+The `scripts/` directory contains automation tools for managing multiple apps:
+- `check-all-apps.sh` - Check Git status of all apps
+- `safe-pull-rebase.sh` - Pull with rebase safely
+- `pre-commit-check.sh` - Pre-commit safety checks
+
+See [scripts/README.md](scripts/README.md) for usage instructions.
+
+---
+
 Access ERPNext at: `http://your-server-ip:8000`
 
 **Login Credentials:**
