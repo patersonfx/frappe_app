@@ -116,7 +116,7 @@ git branch -vv
 
 **Output shows:**
 - Current branch (marked with `*`)
-- Tracking relationship (e.g., `[upstream/360-one: ahead 1, behind 2]`)
+- Tracking relationship (e.g., `[upstream/your-branch: ahead 1, behind 2]`)
 - Latest commit hash and message
 
 ### 4. Identify Divergence
@@ -267,35 +267,35 @@ git status
 git fetch upstream
 
 # Step 3: Preview incoming commits
-git log HEAD..upstream/360-one --oneline
-git log HEAD..upstream/360-one --stat  # See files changed
+git log HEAD..upstream/your-branch --oneline
+git log HEAD..upstream/your-branch --stat  # See files changed
 
 # Step 4: Preview your local commits
-git log upstream/360-one..HEAD --oneline
+git log upstream/your-branch..HEAD --oneline
 
 # Step 5: Create backup (safety first!)
-git branch backup-360-one-$(date +%Y%m%d-%H%M%S)
+git branch backup-your-branch-$(date +%Y%m%d-%H%M%S)
 
 # Step 6: Execute rebase
-git rebase upstream/360-one
+git rebase upstream/your-branch
 
 # Step 7: Verify results
 git log --oneline --graph -10
 git status
 
 # Step 8: Push (requires force push)
-git push --force-with-lease upstream 360-one
+git push --force-with-lease upstream your-branch
 ```
 
 **Visual Representation:**
 ```
 Before Rebase:
-    A---B---C  (upstream/360-one)
+    A---B---C  (upstream/your-branch)
          \
           D---E  (your branch)
 
 After Rebase:
-    A---B---C  (upstream/360-one)
+    A---B---C  (upstream/your-branch)
              \
               D'---E'  (your branch - commits rewritten)
 ```
@@ -337,10 +337,10 @@ git status
 git fetch upstream
 
 # Step 3: Preview incoming changes
-git log HEAD..upstream/360-one --oneline
+git log HEAD..upstream/your-branch --oneline
 
 # Step 4: Execute merge
-git merge upstream/360-one
+git merge upstream/your-branch
 
 # Step 5: If merge conflicts occur:
 git status  # Shows conflicted files
@@ -349,18 +349,18 @@ git add resolved-file.js
 git commit  # Completes the merge
 
 # Step 6: Push merged changes
-git push upstream 360-one
+git push upstream your-branch
 ```
 
 **Visual Representation:**
 ```
 Before Merge:
-    A---B---C  (upstream/360-one)
+    A---B---C  (upstream/your-branch)
          \
           D---E  (your branch)
 
 After Merge:
-    A---B---C  (upstream/360-one)
+    A---B---C  (upstream/your-branch)
          \   \
           D---E---M  (your branch with merge commit M)
 ```
@@ -375,13 +375,13 @@ After Merge:
 
 ```bash
 # Step 1: Save your work
-git diff upstream/360-one > my-changes.patch
+git diff upstream/your-branch > my-changes.patch
 # Or identify your commit hashes
-git log upstream/360-one..HEAD --oneline > my-commits.txt
+git log upstream/your-branch..HEAD --oneline > my-commits.txt
 
 # Step 2: Hard reset to remote
 git fetch upstream
-git reset --hard upstream/360-one
+git reset --hard upstream/your-branch
 
 # Step 3: Re-apply changes
 git apply my-changes.patch
@@ -498,8 +498,8 @@ git rebase upstream/main
 **Recognition:**
 ```bash
 $ git status
-On branch 360-one
-Your branch and 'upstream/360-one' have diverged,
+On branch your-branch
+Your branch and 'upstream/your-branch' have diverged,
 and have 1 and 2 different commits each, respectively.
 ```
 
@@ -508,16 +508,16 @@ and have 1 and 2 different commits each, respectively.
 # Quick version
 git status
 git fetch upstream
-git rebase upstream/360-one
+git rebase upstream/your-branch
 
 # Detailed version with safety
 git status                                      # Verify clean
-git branch backup-360-one-$(date +%Y%m%d)       # Create backup
+git branch backup-your-branch-$(date +%Y%m%d)       # Create backup
 git fetch upstream                              # Get remote changes
-git log HEAD..upstream/360-one --oneline        # Preview incoming
-git rebase upstream/360-one                     # Rebase
+git log HEAD..upstream/your-branch --oneline        # Preview incoming
+git rebase upstream/your-branch                     # Rebase
 git log --oneline --graph -10                   # Verify
-git push --force-with-lease upstream 360-one    # Push
+git push --force-with-lease upstream your-branch    # Push
 ```
 
 ### Scenario 2: "Uncommitted changes + need to pull"
@@ -564,7 +564,7 @@ Apps with diverged branches: 3
 ```bash
 # Handle each app individually
 cd /home/frappe/frappe-bench/apps/compliance
-git status && git fetch upstream && git rebase upstream/360-one
+git status && git fetch upstream && git rebase upstream/your-branch
 
 cd /home/frappe/frappe-bench/apps/custom_app
 git status && git fetch origin && git rebase origin/main
@@ -730,7 +730,7 @@ git reflog  # Find pre-rebase state
 git branch  # List backups
 
 # Reset to backup
-git reset --hard backup-360-one-20241226-143000
+git reset --hard backup-your-branch-20241226-143000
 
 # Verify
 git log --oneline -5
@@ -743,9 +743,9 @@ git log --oneline -5
 git reflog
 
 # Output shows:
-# abc1234 HEAD@{0}: rebase finished: refs/heads/360-one
+# abc1234 HEAD@{0}: rebase finished: refs/heads/your-branch
 # def5678 HEAD@{1}: rebase: commit message
-# ghi9012 HEAD@{2}: rebase: checkout upstream/360-one
+# ghi9012 HEAD@{2}: rebase: checkout upstream/your-branch
 # jkl3456 HEAD@{3}: commit: your commit  <- Pre-rebase state!
 
 # Reset to pre-rebase state
@@ -904,7 +904,7 @@ Checking: erpnext
   ✓ Clean and up-to-date
 
 Checking: compliance
-  🔀 Branch diverged: ## 360-one...upstream/360-one [ahead 1, behind 2]
+  🔀 Branch diverged: ## your-branch...upstream/your-branch [ahead 1, behind 2]
 
 Checking: custom_app
   ⚠️  Has uncommitted changes
@@ -950,15 +950,15 @@ cd /home/frappe/frappe-bench/apps/your_app
 ```
 Safe Pull with Rebase for: compliance
 ========================================
-Current branch: 360-one
+Current branch: your-branch
 Remote: upstream
 Fetching from upstream...
 Status: 1 ahead, 2 behind
 Branch has diverged. Creating backup...
-Created backup: backup-360-one-20241226-143527
+Created backup: backup-your-branch-20241226-143527
 Rebasing...
 ✓ Rebase successful
-To push: git push --force-with-lease upstream 360-one
+To push: git push --force-with-lease upstream your-branch
 ```
 
 ### pre-commit-check.sh
@@ -1121,7 +1121,7 @@ git push --force-with-lease upstream branch
 **Backup Naming:**
 ```bash
 # Good: Timestamped and descriptive
-backup-360-one-before-rebase-20241226-143000
+backup-your-branch-before-rebase-20241226-143000
 
 # Poor: Non-descriptive
 backup
@@ -1132,7 +1132,7 @@ old
 **Cleanup Old Backups:**
 ```bash
 # Keep only last 3 backups per branch
-git branch | grep "backup-360-one" | head -n -3 | xargs git branch -d
+git branch | grep "backup-your-branch" | head -n -3 | xargs git branch -d
 ```
 
 ### 5. Commit Hygiene
@@ -1501,13 +1501,13 @@ git status
 git log --oneline --graph -10
 
 # See incoming commits
-git log HEAD..upstream/360-one --oneline
+git log HEAD..upstream/your-branch --oneline
 
 # See outgoing commits
-git log upstream/360-one..HEAD --oneline
+git log upstream/your-branch..HEAD --oneline
 
 # Count divergence
-git rev-list --left-right --count HEAD...upstream/360-one
+git rev-list --left-right --count HEAD...upstream/your-branch
 ```
 
 ### Rebase Workflow (Quick)
@@ -1517,17 +1517,17 @@ git rev-list --left-right --count HEAD...upstream/360-one
 git status                          # Must be clean
 git branch backup-$(date +%Y%m%d)   # Create backup
 git fetch upstream                  # Get remote changes
-git rebase upstream/360-one         # Rebase
+git rebase upstream/your-branch         # Rebase
 git log --graph --oneline -10       # Verify
-git push --force-with-lease upstream 360-one  # Push
+git push --force-with-lease upstream your-branch  # Push
 ```
 
 ### Merge Workflow (Quick)
 
 ```bash
 git fetch upstream
-git merge upstream/360-one
-git push upstream 360-one
+git merge upstream/your-branch
+git push upstream your-branch
 ```
 
 ### Emergency Abort Commands
