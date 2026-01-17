@@ -171,7 +171,7 @@ cd frappe-bench
 Set proper permissions:
 
 ```bash
-chmod -R o+rx /home/frappe
+sudo chmod -R o+rx /home/frappe
 ```
 
 ---
