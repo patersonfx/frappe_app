@@ -393,10 +393,20 @@ sudo timedatectl set-timezone Asia/Kolkata
 *Adjust timezone as needed*
 
 #### Add Site to Hosts
+
+**Option 1: Using Bench Command (Recommended)**
 ```bash
 bench --site [site-name] add-to-hosts
 ```
 
+**Option 2: Manual Configuration**
+
+For custom domain mapping or when bench command doesn't work:
+```bash
+sudo sh -c 'echo "127.0.0.1 [site-name]" >> /etc/hosts'
+```
+
+**Note:** Replace `[site-name]` with your actual site name
 ---
 
 ### 5. Restart Services
