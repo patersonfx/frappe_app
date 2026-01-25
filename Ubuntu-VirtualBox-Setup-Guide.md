@@ -11,6 +11,7 @@
 8. [Post-Installation](#post-installation)
 9. [Frappe Installation](#frappe-installation)
 10. [Troubleshooting](#troubleshooting)
+11. [Renaming VDI Files](#renaming-vdi-files)
 
 ---
 
@@ -750,6 +751,51 @@ bench --site mysite.local scheduler enable
    ```bash
    sudo systemctl disable snapd
    ```
+
+---
+
+## Renaming VDI Files
+
+To rename your VDI file in VirtualBox, you'll need to use the VBoxManage command-line tool.
+
+### Steps to Rename the VDI
+
+1. **Power off the VM** - The VM must be completely shut down (not saved state)
+
+2. **Open Command Prompt or Terminal**
+   - Windows: Run as Administrator
+   - Linux: Use sudo
+
+3. **Run the rename command:**
+
+**On Windows:**
+```cmd
+"C:\Program Files\Oracle\VirtualBox\VBoxManage.exe" modifymedium disk "C:\path\to\UbuntuFx.vdi" --move "C:\path\to\PatersonFxLive.vdi"
+```
+
+**On Linux:**
+```bash
+VBoxManage modifymedium disk "/path/to/UbuntuFx.vdi" --move "/path/to/PatersonFxLive.vdi"
+```
+
+Replace `/path/to/` with the actual path where your VDI is located.
+
+### Alternative Method (Clone Instead of Move)
+
+If you want to keep both files (original and renamed copy):
+
+```bash
+VBoxManage clonemedium disk "UbuntuFx.vdi" "PatersonFxLive.vdi"
+```
+
+Then detach the old VDI from the VM and attach the new one.
+
+### Important Notes
+
+- The `--move` option renames the file directly without creating a copy
+- Make sure the VM is completely powered off before running this command
+- After renaming, VirtualBox will automatically update its media registry
+- You don't need to reconfigure the VM - it will automatically reference the renamed file
 
 ---
 
