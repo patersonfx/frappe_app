@@ -215,7 +215,7 @@ bench --site [site-name] install-app erpnext
 
 #### Optional: Install HRMS
 ```bash
-bench get-app hrms
+bench get-app --branch version-15 hrms
 bench --site [site-name] install-app hrms
 ```
 
