@@ -31,8 +31,21 @@ Update system packages:
 sudo apt-get update -y
 sudo apt-get upgrade -y
 sudo apt install build-essential dkms linux-headers-$(uname -r) -y
+```
+
+#### VM Guest Tools (choose one based on your hypervisor)
+
+**VirtualBox:**
+```bash
 sudo apt install -y virtualbox-guest-utils virtualbox-guest-x11
 ```
+
+**VMware:**
+```bash
+sudo apt install -y open-vm-tools open-vm-tools-desktop
+```
+
+**Note**: Skip this step if you are installing on bare metal or a cloud server.
 
 ---
 
