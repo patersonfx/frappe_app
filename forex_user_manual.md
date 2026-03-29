@@ -211,7 +211,7 @@ The **Discount** child table defines slab-based discounts.
 | Field | Description |
 |-------|-------------|
 | M/H/Y | Period type: **M** (Month), **H** (Half-year), **Y** (Year) |
-| I/F | Discount stage: **I** (Inception) or **F** (Final) |
+| I/F | Discount stage: **I** (Incremental) or **F** (Flat) |
 | From Date | Effective start date |
 | Disc On | Discount basis: Brokerage or Volume |
 | From Slab | Starting slab threshold |
